@@ -1,0 +1,57 @@
+{
+  "folders": [
+    {
+      "path": "tower.client",
+      "name": "client"
+    },
+    {
+      "path": "tower",
+      "name": "server"
+    },
+    {
+      "name": "tower",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.suggestSelection": "first",
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "javascript.referencesCodeLens.enabled": true,
+    "javascript.referencesCodeLens.showOnAllFunctions": true,
+    "typescript.implementationsCodeLens.enabled": true,
+    "typescript.referencesCodeLens.enabled": true,
+    "typescript.referencesCodeLens.showOnAllFunctions": true,
+    "js/ts.implicitProjectConfig.checkJs": true,
+    "files.exclude": {
+      "**/.nyc_*": true,
+      "**/coverage": true,
+      "**/node_modules": true
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "explorer.confirmDragAndDrop": false,
+    "vetur.format.defaultFormatter.js": "vscode-typescript",
+    "eslint.alwaysShowStatus": true,
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "eslint.codeActionsOnSave.mode": "all",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    },
+    "workbench.colorCustomizations": {
+      "commandCenter.border": "#15202b99",
+      "sash.hoverBorder": "#d6fdb8",
+      "statusBar.background": "#b9fc86",
+      "statusBar.foreground": "#15202b",
+      "statusBarItem.hoverBackground": "#9cfb54",
+      "statusBarItem.remoteBackground": "#b9fc86",
+      "statusBarItem.remoteForeground": "#15202b",
+      "titleBar.activeBackground": "#b9fc86",
+      "titleBar.activeForeground": "#15202b",
+      "titleBar.inactiveBackground": "#b9fc8699",
+      "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.color": "#b9fc86"
+  }
+}
