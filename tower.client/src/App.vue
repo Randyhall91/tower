@@ -1,15 +1,25 @@
 <template>
-  <header>
-    <Navbar />
-  </header>
   <main>
-    <router-view />
-  </main>
-  <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
+    <div class="container-fluid">
+
+      <div class="row">
+
+        <div class="col-10 bg-dark">
+          <div>
+            <img src="./Public/Logo.png" class="logo p-3" alt="Tower" title="Tower">
+          </div>
+          <router-view />
+        </div>
+
+        <div class="col-2 bg-grey">
+          <!-- Sidebar Login -->
+
+        </div>
+      </div>
     </div>
-  </footer>
+  </main>
+
+
 </template>
 
 <script>
@@ -27,5 +37,15 @@ export default {
 }
 </script>
 <style lang="scss">
+.logo {
+  height: 4rem;
+  width: 12rem
+}
+
+.col-height {
+  height: 100vh
+}
+
+
 @import "./assets/scss/main.scss";
 </style>

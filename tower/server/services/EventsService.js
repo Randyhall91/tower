@@ -4,7 +4,7 @@ import { BadRequest, Forbidden } from "../utils/Errors.js"
 import { logger } from "../utils/Logger.js"
 
 
-function sanitize(body){
+function sanitize(body) {
   const writable = {
     name: body.name,
     description: body.description,
@@ -19,7 +19,7 @@ class EventsService {
     const event = await this.getEventById(id)
 
     // @ts-ignore
-    if(event.creatorId.toString() != userinfo.id){
+    if (event.creatorId.toString() != userinfo.id) {
       throw new Forbidden("You can't cancel this...It's not yours")
     }
     event.isCanceled = true
@@ -27,32 +27,34 @@ class EventsService {
     return event
 
   }
-  
+
 
 
   async editEvent(eventId, eventData, userInfo) {
-    
+
     const event = await this.getEventById(eventId)
-    
+
     //@ts-ignore
-    if(event.creatorId.toString() != userInfo.id){
-        throw new Forbidden("You can't edit this...It's not yours")
-      }
+    if (event.creatorId.toString() != userInfo.id) {
+      throw new Forbidden("You can't edit this...It's not yours")
+    }
+    if (event.isCanceled) {
+      throw new Forbidden("You can't edit an event after its been canceled")
+    }
+    eventData.isCanceled = false
 
-
-
-      logger.log('EditEvent',event)
-      const update = sanitize(eventData)
     const updatedEvent = await dbContext.Event.findOneAndUpdate(
       { _id: eventId },
-      { $set: update},
-      { runValidators: true, setDefaultsOnInsert: true, new: true}
+      { $set: eventData },
+      { runValidators: true, setDefaultsOnInsert: true, new: true }
     )
     return updatedEvent
-    }
+  }
+
+
   async getEventById(id) {
     const event = await dbContext.Event.findById(id).populate('creator', 'name picture')
-    if(!event){
+    if (!event) {
       throw new BadRequest('Invalid or bad Id')
     }
     return event
