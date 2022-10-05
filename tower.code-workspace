@@ -7,10 +7,6 @@
     {
       "path": "tower",
       "name": "server"
-    },
-    {
-      "name": "tower",
-      "path": "."
     }
   ],
   "settings": {
@@ -50,7 +46,13 @@
       "titleBar.activeBackground": "#b9fc86",
       "titleBar.activeForeground": "#15202b",
       "titleBar.inactiveBackground": "#b9fc8699",
-      "titleBar.inactiveForeground": "#15202b99"
+      "titleBar.inactiveForeground": "#15202b99",
+      "activityBar.activeBackground": "#d6fdb8",
+      "activityBar.background": "#d6fdb8",
+      "activityBar.foreground": "#15202b",
+      "activityBar.inactiveForeground": "#15202b99",
+      "activityBarBadge.background": "#64a5fb",
+      "activityBarBadge.foreground": "#15202b"
     },
     "peacock.color": "#b9fc86"
   }
