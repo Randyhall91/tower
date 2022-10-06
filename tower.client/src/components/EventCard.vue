@@ -11,7 +11,7 @@
         <p class="m-0">{{towerEvent.location}}</p>
         <p class="m-0">{{new Date(towerEvent.startDate).toLocaleDateString('en-US',
         {month: 'short', year:'2-digit'})}}</p>
-        <p class="capacity">{{towerEvent.capacity}}</p>
+        <p class="capacity">{{towerEvent.capacity}} spots left</p>
       </div>
     </div>
 
@@ -44,6 +44,7 @@ export default {
   position: absolute;
   right: 1rem;
   bottom: 0;
+  margin:0 ;
 }
 
 .card-box {

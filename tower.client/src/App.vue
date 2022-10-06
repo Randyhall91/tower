@@ -13,7 +13,7 @@
 
         <div class="col-2 bg-grey">
           <!-- Sidebar Login -->
-
+          <Login />
         </div>
       </div>
     </div>
@@ -26,6 +26,7 @@
 import { computed } from 'vue'
 import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
+import Login from "./components/Login.vue"
 
 export default {
   setup() {
@@ -33,7 +34,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar }
+  components: { Navbar, Login }
 }
 </script>
 <style lang="scss">
