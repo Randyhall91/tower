@@ -1,5 +1,7 @@
 <template>
-  <div class="event-details">
+  <div class="event-details d-flex">
+    <img src="" alt="">
+
 
 
   </div>
@@ -7,7 +9,12 @@
 
 
 <script>
+import { TowerEvent } from '../models/TowerEvent.js';
+
 export default {
+  props: {
+    towerEvent: { type: TowerEvent, required: true }
+  },
 
   setup() {
     return {}

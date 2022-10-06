@@ -1,8 +1,12 @@
 <template>
   <div class="event-card col-3">
-    <div class="card card-size m-3">
-      <img :src="towerEvent.coverImg" :alt="towerEvent.name" :title="towerEvent.name">
-      <div class="card-box p-2 bg-grey bg-opacity-75">
+    <div class="card border-dark rounded card-size m-3">
+      <router-link v-if="towerEvent.id" :to="{name:'EventDetails', params: {id: towerEvent.id}}">
+        <img :src="towerEvent.coverImg" :alt="towerEvent.name" :title="towerEvent.name"
+          class="img-fluid rounded selectable">
+      </router-link>
+
+      <div class="card-box p-2 bg-grey bg-opacity-75 rounded">
         <h5>{{towerEvent.name}}</h5>
         <p class="m-0">{{towerEvent.location}}</p>
         <p class="m-0">{{new Date(towerEvent.startDate).toLocaleDateString('en-US',

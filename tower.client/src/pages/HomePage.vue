@@ -54,7 +54,7 @@ export default {
       getEvents();
     });
     return {
-      towerEvents: computed(() => AppState.towerEvent)
+      towerEvents: computed(() => AppState.towerEvent),
     };
   },
   components: { EventCard }
