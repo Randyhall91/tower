@@ -4,17 +4,13 @@ import { BadRequest, Forbidden } from "../utils/Errors.js"
 import { logger } from "../utils/Logger.js"
 
 
-function sanitize(body) {
-  const writable = {
-    name: body.name,
-    description: body.description,
-    isCanceled: body.isCanceled
-  }
-  return writable
-}
-
-
 class EventsService {
+  async getCommentsByEventId(eventId) {
+    const comments = await dbContext.Comment.find({ eventId })
+      .populate('creator', 'name picture')
+    return comments
+  }
+
   async cancelEvent(id, userinfo) {
     const event = await this.getEventById(id)
 
@@ -25,10 +21,7 @@ class EventsService {
     event.isCanceled = true
     await event.save()
     return event
-
   }
-
-
 
   async editEvent(eventId, eventData, userInfo) {
 
@@ -59,6 +52,9 @@ class EventsService {
     }
     return event
   }
+
+
+
   async createEvent(eventData) {
     const event = await dbContext.Event.create(eventData)
     await event.populate('creator', 'name picture')

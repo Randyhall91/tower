@@ -1,7 +1,7 @@
 <template>
-  <div class="event-card col-3">
-    <div class="card border-dark rounded card-size m-3">
-      <router-link v-if="towerEvent.id" :to="{name:'EventDetails', params: {id: towerEvent.id}}">
+  <div v-if="towerEvent" class="event-card col-lg-3">
+    <div class="card m-3 border-dark elevation-2 rounded card-size">
+      <router-link :to="{name:'EventDetails', params: {id: towerEvent.id}}">
         <img :src="towerEvent.coverImg" :alt="towerEvent.name" :title="towerEvent.name"
           class="img-fluid rounded selectable">
       </router-link>
@@ -13,6 +13,7 @@
         {month: 'short', year:'2-digit'})}}</p>
         <p class="capacity">{{towerEvent.capacity}} spots left</p>
       </div>
+
     </div>
 
 
@@ -21,10 +22,11 @@
 
 
 <script>
+import { Account } from "../models/Account.js";
 import { TowerEvent } from "../models/TowerEvent.js"
 export default {
   props: {
-    towerEvent: { type: TowerEvent, required: true }
+    towerEvent: { type: TowerEvent, required: true },
   },
   setup() {
 
@@ -44,7 +46,7 @@ export default {
   position: absolute;
   right: 1rem;
   bottom: 0;
-  margin:0 ;
+  margin: 0;
 }
 
 .card-box {

@@ -4,14 +4,16 @@
 
       <div class="row">
 
-        <div class="col-10 bg-dark">
+        <div class="col-11 bg-dark">
           <div>
-            <img src="./Public/Logo.png" class="logo p-3" alt="Tower" title="Tower">
+            <router-link :to="{name: 'Home'}">
+              <img src="./Public/Logo.png" class="logo p-3 selectable" alt="Tower" title="Tower">
+            </router-link>
           </div>
           <router-view />
         </div>
 
-        <div class="col-2 bg-grey">
+        <div class="col-1 bg-grey">
           <!-- Sidebar Login -->
           <Login />
         </div>

@@ -1,52 +1,65 @@
 <template>
   <span class="navbar-text">
-    <button
-      class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0"
-      @click="login"
-      v-if="!user.isAuthenticated"
-    >
+    <button class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0" @click="login"
+      v-if="!user.isAuthenticated">
       Login
     </button>
 
-    <div class="dropdown my-2 my-lg-0" v-else>
-      <div
-        class="dropdown-toggle selectable"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-        id="authDropdown"
-      >
-        <div v-if="account.picture || user.picture">
-          <img
-            :src="account.picture || user.picture"
-            alt="account photo"
-            height="40"
-            class="rounded"
-          />
-          <span class="mx-3 text-success lighten-30">{{ account.name || user.name }}</span>
-        </div>
+    <div class="dropdown text-center my-2 my-lg-0 pt-4" v-else>
+      <div v-if="account.picture || user.picture">
+        <img :src="account.picture || user.picture" alt="account photo" height="40" class="rounded" />
       </div>
-      <div class="dropdown-menu p-0 list-group w-100" aria-labelledby="authDropdown">
+
+      <!-- <span class="mx-3 text-success lighten-30">{{ account.name || user.name }}</span> -->
+      <div class="mt-5">
+        <router-link :to="{name: 'Home'}">
+          <h4 class="selectable">home</h4>
+        </router-link>
+
+      </div>
+      <div class="mt-5">
         <router-link :to="{ name: 'Account' }">
           <div class="list-group-item list-group-item-action hoverable">
-            Manage Account
+            Account
           </div>
         </router-link>
-        <div class="list-group-item list-group-item-action hoverable text-danger" @click="logout">
+      </div>
+      <div class="mt-5">
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createEventModal">
+          new event
+        </button>
+      </div>
+      <div class="mt-5">
+
+        <button @click="logout" class="btn btn-outline-light ">
           <i class="mdi mdi-logout"></i>
           logout
-        </div>
+        </button>
       </div>
+
     </div>
   </span>
+
+  <event-modal />
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { AppState } from '../AppState'
 import { AuthService } from '../services/AuthService'
+import { eventService } from '../services/EventService.js'
+import Pop from '../utils/Pop.js'
 export default {
   setup() {
+
+
     return {
+
+
+
+
+
+
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       async login() {

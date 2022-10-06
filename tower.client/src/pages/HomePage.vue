@@ -1,30 +1,32 @@
 <template>
   <div class="row">
     <div class="col-12">
-      <div class="row d-flex justify-content-center">
 
-        <div class="banner">
-          <img src="../Public/TowerBanner.png.png" alt="Banner" title="Tower Intro Banner">
-          <div class="banner-text">
-            <img src="../Public/Get ahead of the scalpers. Reserve your seat now with real events for real people..png"
-              alt="">
-          </div>
-        </div>
-        <div class="col-12 bg-grey d-flex align-content-center">
-
-          <p class="p-3 m-0">All</p>
-          <p class="p-3 m-0">All</p>
-          <p class="p-3 m-0">All</p>
-          <!-- Filter bar -->
-        </div>
-        <div class="col-12 d-flex">
-          <!-- Event Cards -->
-          <div class="row">
-
-            <EventCard v-for="e in towerEvents" :key="e" :towerEvent="e" />
-          </div>
+      <div class="banner">
+        <img src="../Public/TowerBanner.png.png" class="banner-width" alt="Banner" title="Tower Intro Banner">
+        <div class="banner-text">
+          <img src="../Public/Get ahead of the scalpers. Reserve your seat now with real events for real people..png"
+            alt="Banner">
         </div>
       </div>
+
+
+
+      <div class=" bg-grey d-flex align-content-center border-dark elevation-2">
+
+        <p class="p-3 m-0">All</p>
+        <p class="p-3 m-0">All</p>
+        <p class="p-3 m-0">All</p>
+        <!-- Filter bar -->
+      </div>
+
+      <!-- Event Cards -->
+      <div class="row">
+
+        <EventCard v-for="e in towerEvents" :key="e" :towerEvent="e" />
+      </div>
+
+
     </div>
 
 
@@ -55,16 +57,21 @@ export default {
     });
     return {
       towerEvents: computed(() => AppState.towerEvent),
-    };
+    }
   },
   components: { EventCard }
 }
 </script>
 
 <style scoped lang="scss">
+.banner-width {
+  width: 90vw;
+  height: 15rem;
+}
+
 .banner {
-  // width: 80%;
   position: relative;
+
 }
 
 .banner-text {

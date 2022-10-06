@@ -12,7 +12,7 @@ class TicketsService {
     if (!ticket) {
       throw new Error('Back ticket id or request')
     }
-    logger.log('ticket', ticket)
+    // logger.log('ticket', ticket)
 
     // @ts-ignore
     if (accountId != ticket.accountId.toString()) {
@@ -29,9 +29,10 @@ class TicketsService {
     return ticket
 
   }
-  async getTicketsbyEventId(accountId, eventId) {
+  async getTicketsbyEventId(eventId) {
     const tickets = await dbContext.Ticket.find({ eventId })
       .populate('profile', 'name picture')
+      .populate('event')
     return tickets
   }
 
