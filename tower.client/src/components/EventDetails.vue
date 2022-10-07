@@ -22,13 +22,13 @@
     <div class="capacity-position">
       <p class="d-flex"><strong>{{activeEvent.capacity}}</strong> spots left</p>
     </div>
-    <div v-if="!activeEvent.isCanceled && account.id" class="attend-position">
+    <div v-if="account.id" class="attend-position">
       <button v-if="activeEvent.capacity > 0 && !usersTicket" @click="makeTicketforEvent(activeEvent.id)"
         class="btn btn-warning d-flex"><i class="mdi mdi-human"></i>Attend</button>
 
-      <button v-else-if="activeEvent.capacity <= 0 && !usersTicket" class="btn btn-danger">Sold Out</button>
+      <button v-else-if="usersTicket" @click="removeTicket()" class="btn btn-danger">Refund</button>
 
-      <button v-else @click="removeTicket()" class="btn btn-danger">Refund</button>
+      <button v-else class="btn btn-danger">Sold Out</button>
     </div>
 
 
@@ -105,6 +105,8 @@ export default {
       },
       async removeTicket() {
         try {
+          const yes = await Pop.confirm('Are you sure you want to refund your ticket?')
+          if (!yes) { return }
           await eventService.removeTicket(AppState.usersTicket.id)
         } catch (error) {
           Pop.error('[removeTicket]', error)

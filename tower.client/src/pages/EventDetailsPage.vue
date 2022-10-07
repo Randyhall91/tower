@@ -1,9 +1,19 @@
 <template>
-  <div class="event-details d-flex">
-    <EventDetails v-if="activeEvent" :key="activeEvent" :activeEvent="activeEvent" />
-    <!-- TODO Add Comments -->
+  <div class="row event-details d-flex">
+    <div class="col-12">
+
+      <EventDetails v-if="activeEvent" :key="activeEvent" :activeEvent="activeEvent" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <EventComments :activeEvent="activeEvent" />
+
+    </div>
 
   </div>
+
 </template>
 
 
@@ -16,6 +26,7 @@ import { TowerEvent } from '../models/TowerEvent.js';
 import { eventService } from '../services/EventService.js';
 import Pop from '../utils/Pop.js';
 import EventDetails from '../components/EventDetails.vue';
+import EventComments from '../components/EventComments.vue';
 
 export default {
   props: {
@@ -38,7 +49,7 @@ export default {
       activeEvent: computed(() => AppState.activeEvent)
     };
   },
-  components: { EventDetails }
+  components: { EventDetails, EventComments }
 }
 </script>
 

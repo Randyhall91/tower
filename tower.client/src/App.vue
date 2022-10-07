@@ -5,11 +5,11 @@
       <div class="row">
 
         <div class="col-11 bg-dark">
-          <div>
-            <router-link :to="{name: 'Home'}">
-              <img src="./Public/Logo.png" class="logo p-3 selectable" alt="Tower" title="Tower">
-            </router-link>
-          </div>
+
+          <router-link :to="{name: 'Home'}">
+            <img src="./Public/Logo.png" class="logo p-3 selectable" alt="Tower" title="Tower">
+          </router-link>
+
           <router-view />
         </div>
 
