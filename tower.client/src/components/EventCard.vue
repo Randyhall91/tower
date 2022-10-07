@@ -6,12 +6,19 @@
           class="img-fluid rounded selectable">
       </router-link>
 
-      <div class="card-box p-2 bg-grey bg-opacity-75 rounded">
+      <div v-if="!towerEvent.isCanceled" class="card-box p-2 bg-grey bg-opacity-75 rounded">
         <h5>{{towerEvent.name}}</h5>
         <p class="m-0">{{towerEvent.location}}</p>
         <p class="m-0">{{new Date(towerEvent.startDate).toLocaleDateString('en-US',
         {month: 'short', year:'2-digit'})}}</p>
         <p class="capacity">{{towerEvent.capacity}} spots left</p>
+      </div>
+      <div v-else class="card-box p-2 bg-grey bg-opacity-75 rounded">
+        <h5>{{towerEvent.name}}</h5>
+        <p class="m-0">{{towerEvent.location}}</p>
+        <p class="m-0">{{new Date(towerEvent.startDate).toLocaleDateString('en-US',
+        {month: 'short', year:'2-digit'})}}</p>
+        <p class="capacity text-danger">Event Canceled</p>
       </div>
 
     </div>

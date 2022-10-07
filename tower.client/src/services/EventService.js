@@ -19,23 +19,45 @@ class EventService {
   async createEvent(formData) {
     const res = await api.post('api/events', formData)
     const newEvent = new TowerEvent(res.data)
+    console.log(res.data);
+
     AppState.towerEvent.push(newEvent)
-    // TODO router.push to eventDetails page
+    return res.data
+
+  }
+  async cancelEvent(eventId) {
+    await api.delete(`api/events/${eventId}`)
+    // const event = AppState.towerEvent.find(eventId)
+    // event.isCanceled = true
+    this.getEventById(eventId)
   }
 
 
 
 
   async makeTicketforEvent(eventId) {
-    // console.log(eventId);
     await api.post('api/tickets', { eventId })
     AppState.activeEvent.capacity--
     this.getTicketHolders(eventId)
+
   }
   async getTicketHolders(eventId) {
     const res = await api.get(`api/events/${eventId}/tickets`)
     console.log('getTicketHolders', res.data)
+    let ticketHolders = res.data
+    let userTicket = ticketHolders.filter(t => t.accountId == AppState.user.id)
+    // console.log('check', checkForId.length);
+    // TODO finish getting active users ticket into appstate properly
+    if (userTicket) {
+      AppState.usersTicket = userTicket
+      console.log('AppState.hasTicket', AppState.usersTicket);
+    }
     AppState.eventTicketHolders = res.data
+  }
+  async removeTicket(id) {
+    await api.delete(`api/tickets/${id}`)
+    this.getTicketHolders(eventId)
+
   }
 
 }

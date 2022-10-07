@@ -51,7 +51,8 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
+              <!-- TODO Send to details page on submit....somehow including the new events ID -->
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
             </div>
           </form>
         </div>
@@ -64,6 +65,8 @@
 
 <script>
 import { ref } from 'vue';
+import { AppState } from '../AppState.js';
+import { router } from '../router.js';
 import { eventService } from '../services/EventService.js';
 import Pop from '../utils/Pop.js';
 
@@ -74,7 +77,9 @@ export default {
       editable,
       async handleSubmit() {
         try {
-          await eventService.createEvent(editable.value)
+          const event = await eventService.createEvent(editable.value)
+          router.push({ name: 'EventDetails', params: { id: event.id } })
+          editable.value = {}
         } catch (error) {
           Pop.error('[handleSubmit]', error)
         }
