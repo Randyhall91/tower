@@ -1,21 +1,24 @@
 <template>
   <div class="event-comments">
-    <div class="form m-2 p-4 bg-grey text-end" @submit.prevent="handleSubmit()">
+    <form class="form m-2 p-4 bg-grey text-end" @submit.prevent="handleSubmit()">
 
       <div class="form-floating bg">
         <textarea class="form-control bg-dark text-light" v-model="editable.body" placeholder="Leave a comment here"
-          id="floatingTextarea"></textarea>
+          id="floatingTextarea" aria-label="Comment here"></textarea>
         <label for="floatingTextarea">Make a Comment</label>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+      <button type="submit" class="btn btn-primary" aria-label="Submit">Submit</button>
+    </form>
     <div v-for="c in eventComments" class="d-flex justify-content-center align-items-center m-3">
-      <img height="50" class="rounded me-3" :src="c.creator.picture" :alt="c.creator.name" :title="c.creator.name">
+      <img height="50" class="rounded me-3" :src="c.creator.picture" :alt="c.creator.name" :title="c.creator.name"
+        :aria-label="c.creator.name">
       <div class="bg-grey d-flex flex-column px-3">
         <div class="align-self-end">
-          <i @click="removeComment(c.id)" class="mdi mdi-close text-danger selectable"></i>
+          <i @click="removeComment(c.id)" class="mdi mdi-close text-danger selectable" title="Remove"
+            aria-label="Remove"></i>
         </div>
-        <p>{{c.body}}</p>
+        <p class="text-light">{{c.creator.name}}</p>
+        <p aria-label="Comment" id="body">{{c.body}}</p>
       </div>
 
     </div>
@@ -61,7 +64,8 @@ export default {
       },
       async handleSubmit() {
         try {
-          editable.eventId = route.params.id
+          Pop.success('YOu created a comment!')
+          editable.value.eventId = route.params.id
           await eventService.createComment(editable.value)
           editable.value = {}
         } catch (error) {

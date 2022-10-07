@@ -1,9 +1,9 @@
 <template>
   <div class="event-details">
     <div class="border p-3 d-flex" v-if="activeEvent">
-      <div>
-        <img :src="activeEvent.coverImg" class="img-fluid" alt="">
-      </div>
+
+      <img :src="activeEvent.coverImg" class="img-fluid" alt="">
+
       <div class="p-3">
         <h3>{{activeEvent.name}}</h3>
         <p><strong>{{new Date(activeEvent.startDate).toLocaleDateString('en-US',
@@ -11,34 +11,36 @@
         <h5>{{activeEvent.location}}</h5>
         <p>{{activeEvent.description}}</p>
       </div>
-      <div v-if="activeEvent.creatorId == account.id" class="text-end top-right">
+
+      <div class="align-self-end ">
+        <p class="d-flex"><strong>{{activeEvent.capacity}}</strong> spots left</p>
+      </div>
+      <div v-if="account.id" class="ms-3 align-self-end">
+        <button v-if="activeEvent.capacity > 0 && !usersTicket && !activeEvent.isCanceled"
+          @click="makeTicketforEvent(activeEvent.id)" class="btn btn-warning d-flex" title="Attend"
+          aria-label="Attend Event"><i class="mdi mdi-human"></i>Attend</button>
+
+        <button v-else-if="usersTicket" @click="removeTicket()" class="btn btn-danger" aria-label="Refund"
+          title="Refund">Refund</button>
+
+        <button v-else class="btn btn-danger" aria-label="Sold Out" title="Sold Out">Sold Out</button>
+      </div>
+
+      <div v-if="activeEvent.creatorId == account.id" class="text-end">
         <!-- TODO add v-if for owner of event check -->
-        <button v-if="!activeEvent.isCanceled" @click="cancelEvent(activeEvent.id)" class="btn btn-danger">Cancel
+        <button v-if="!activeEvent.isCanceled" @click="cancelEvent(activeEvent.id)" class="btn btn-danger"
+          aria-label="Cancel Event" title="Cancel">Cancel
           Event</button>
-        <button v-else class="btn btn-danger">Event Canceled</button>
+        <button v-else class="btn btn-danger" aria-label="Close" title="Event Canceled">Event Canceled</button>
       </div>
 
     </div>
-    <div class="capacity-position">
-      <p class="d-flex"><strong>{{activeEvent.capacity}}</strong> spots left</p>
-    </div>
-    <div v-if="account.id" class="attend-position">
-      <button v-if="activeEvent.capacity > 0 && !usersTicket" @click="makeTicketforEvent(activeEvent.id)"
-        class="btn btn-warning d-flex"><i class="mdi mdi-human"></i>Attend</button>
-
-      <button v-else-if="usersTicket" @click="removeTicket()" class="btn btn-danger">Refund</button>
-
-      <button v-else class="btn btn-danger">Sold Out</button>
-    </div>
-
-
-    <div class="bg-grey d-flex align-content-center border-dark elevation-2 p-3 mt-3">
-      <img height="50" v-for="t in ticketHolders" :src="t.profile.picture" :alt="t.profile.name"
-        :title="t.profile.name">
+    <div class="bg-grey d-flex border-dark elevation-2 p-3 mt-3">
+      <img class="rounded m-1" height="50" v-for="t in ticketHolders" :aria-label="t.profile.name"
+        :src="t.profile.picture" :alt="t.profile.name" :title="t.profile.name">
 
     </div>
   </div>
-  <!-- TODO add whose attending -->
 </template>
 
 

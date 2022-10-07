@@ -16,6 +16,7 @@ class AccountService {
     AppState.towerEvent = res.data
     console.log(res.data[0].event);
   }
+
 }
 
 export const accountService = new AccountService()

@@ -13,12 +13,13 @@
           <router-view />
         </div>
 
-        <div class="col-1 bg-grey">
+        <div class="col-1 bg-grey login-bar sticky-top">
           <!-- Sidebar Login -->
           <Login />
         </div>
       </div>
     </div>
+    <EventModal />
   </main>
 
 
@@ -40,6 +41,15 @@ export default {
 }
 </script>
 <style lang="scss">
+.login-bar {
+  height: 100vh;
+
+}
+
+main {
+  background-color: var(--bs-dark);
+}
+
 .logo {
   height: 4rem;
   width: 12rem

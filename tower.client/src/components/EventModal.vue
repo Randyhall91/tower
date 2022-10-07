@@ -3,10 +3,10 @@
     <div class="modal fade" id="createEventModal" tabindex="-1" aria-labelledby="createEventModalLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content  bg-dark">
+        <div class="modal-content bg-dark">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="createEventModalLabel">Create new event</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" title="Close"></button>
           </div>
           <form @submit.prevent="handleSubmit()">
             <div class="modal-body">
@@ -50,9 +50,9 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <!-- TODO Send to details page on submit....somehow including the new events ID -->
-              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Save Changes">Save
+                changes</button>
             </div>
           </form>
         </div>

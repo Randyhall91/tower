@@ -6,17 +6,24 @@
         <img src="../Public/TowerBanner.png.png" class="banner-width" alt="Banner" title="Tower Intro Banner">
         <div class="banner-text">
           <img src="../Public/Get ahead of the scalpers. Reserve your seat now with real events for real people..png"
-            alt="Banner">
+            alt="Banner" aria-label="Get Tickets" title="Tower Intro Banner">
         </div>
       </div>
 
 
 
-      <div class=" bg-grey d-flex align-content-center border-dark elevation-2">
+      <div class=" bg-grey d-flex align-content-center justify-content-around border-dark elevation-2">
 
-        <p class="p-3 m-0">All</p>
-        <p class="p-3 m-0">All</p>
-        <p class="p-3 m-0">All</p>
+        <button @click="getEventsByType('')" class='btn btn-outline-success' title="Filter Button: All"
+          aria-label="All">All</button>
+        <button @click="getEventsByType('concert')" class='btn btn-outline-success' title="Filter Button: Concert"
+          aria-label="Concert">Concert</button>
+        <button @click="getEventsByType('convention')" class='btn btn-outline-success' title="Filter Button: Convention"
+          aria-label="Convention">Convention</button>
+        <button @click="getEventsByType('sport')" class='btn btn-outline-success' title="Filter Button: Sport"
+          aria-label="Sport">Sport</button>
+        <button @click="getEventsByType('digital')" class='btn btn-outline-success' title="Filter Button: Digital"
+          aria-label="Digital">Digital</button>
         <!-- Filter bar -->
       </div>
 
@@ -56,6 +63,13 @@ export default {
       getEvents();
     });
     return {
+      async getEventsByType(type) {
+        try {
+          await eventService.getEvents(type)
+        } catch (error) {
+          Pop.error('getEventsByType', error)
+        }
+      },
       towerEvents: computed(() => AppState.towerEvent),
     }
   },

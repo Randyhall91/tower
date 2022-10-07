@@ -4,9 +4,18 @@ import { TowerEvent } from "../models/TowerEvent.js";
 import { api } from "./AxiosService.js"
 class EventService {
 
-  async getEvents() {
-    const res = await api.get('api/events')
-    // console.log('events', res.data);
+  async getEvents(type = '') {
+    let res
+    if (type) {
+      res = await api.get('api/events', {
+        params: {
+          type: type
+        }
+      })
+    } else {
+      res = await api.get('api/events')
+    }
+    console.log('events', res.data);
     AppState.towerEvent = res.data.map(e => new TowerEvent(e))
   }
   async getEventById(id) {
@@ -77,11 +86,14 @@ class EventService {
   }
   async removeComment(id) {
     const res = await api.delete(`api/comments/${id}`)
-    AppState.eventComments = res.data
+    AppState.eventComments = AppState.eventComments.filter(t => t.id == id)
+    this.getCommentsByEventId(AppState.activeEvent.id)
   }
   async createComment(formData) {
-    const res = await api.post('api/comments/')
-
+    console.log('formdata', formData);
+    const res = await api.post('api/comments/', formData)
+    console.log(res.data);
+    AppState.eventComments.push(res.data)
   }
 
 

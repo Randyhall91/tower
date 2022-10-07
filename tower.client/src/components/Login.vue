@@ -40,7 +40,7 @@
     </div>
   </span>
 
-  <event-modal />
+
 </template>
 
 <script>
