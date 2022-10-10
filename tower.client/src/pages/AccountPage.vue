@@ -4,7 +4,7 @@
     <div class="col-12">
 
       <h5 class="text-success">My Tickets</h5>
-      <div class="d-flex">
+      <div class="row">
         <EventCard class="m-3" v-for="e in towerEvents" :key="e.event" :towerEvent="e.event" />
 
       </div>
